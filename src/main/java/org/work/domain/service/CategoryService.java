@@ -3,6 +3,7 @@ package org.work.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.work.domain.model.BookCategoryList;
 import org.work.domain.model.Category;
 import org.work.domain.repository.BookCategoryListRepository;
@@ -44,6 +45,9 @@ public class CategoryService {
     public List<Category> prepare(String categories) {
 
         List<Category> categoryList = new ArrayList<>();
+        if (StringUtils.isEmpty(categories)) { // avoid NPE.
+            return categoryList;
+        }
         for (String category : categories.split(",")) {
             Category catFromRepo = categoryRepository.findByName(category.toLowerCase().trim());
             System.out.println("catFromRepo : " + catFromRepo);
