@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <p>
+    <h2>The List of Book</h2>
+
+    <form th:action="@{/book/search}" th:object="${bookForm}"
+          method="POST">
+
+        <div th:if="${#fields.hasErrors('all')}" class="alert alert-danger">
+            <p th:text="#{common.error}">ErrorMessage</p>
+        </div>
+        <div class="form-group">
+            <label for="categoryName">Category Name<span
+                    th:if="${#fields.hasErrors('categories')}" class="text-danger"
+                    th:errors="*{categoryName}">Error</span>
+            </label> <input type="text" class="form-control" id="categoryName"
+                            name="categoryName" th:field="*{categoryName}" placeholder="Category Name"/>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="reset" class="btn">Reset</button>
+        </div>
+    </form>
+
+    <div th:each="detail : ${books}">
+        <a th:href="@{'/book/show/' + ${detail.id}}"><span th:text="${detail.id}"></span></a>
+        <span th:text="${detail.title}">hogehoge</span>
+        <span th:text="${detail.author}">author</span>
+        <span th:text="${detail.publisher}">publisher</span>
+        <span th:text="${detail.publishDate}">2017-04-29</span>
+    </div>
+    <div>
+        <a th:href="@{'/book/input'}">New Book</a>
+    </div>
+    </p>
+</section>
+</body>
+</html>

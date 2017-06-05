@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <p>
+    <h2>Modify Book!</h2>
+    <form th:action="@{/book/edit}" th:object="${bookForm}"
+          method="POST">
+
+        <div th:if="${#fields.hasErrors('all')}" class="alert alert-danger">
+            <p th:text="#{common.error}">ErrorMessage</p>
+        </div>
+
+        <div class="form-group" th:object="${book}">
+            <label for="title">Title of the book<span
+                    th:if="${#fields.hasErrors('title')}" class="text-danger"
+                    th:errors="*{title}">Error</span>
+            </label> <input type="text" class="form-control" id="title"
+                            name="title" th:field="*{title}" value="*{title}" />
+            <br/>
+
+            <label for="author">Author<span
+                    th:if="${#fields.hasErrors('author')}" class="text-danger"
+                    th:errors="*{author}">Error</span>
+            </label> <input type="text" class="form-control" id="author"
+                            name="author" th:field="*{author}" value="*{author}"/>
+            <br/>
+
+            <label for="publisher">Publisher<span
+                    th:if="${#fields.hasErrors('publisher')}" class="text-danger"
+                    th:errors="*{publisher}">Error</span>
+            </label> <input type="text" class="form-control" id="publisher"
+                            name="publisher" th:field="*{publisher}" value="*{publisher}"/>
+            <br/>
+
+            <label for="publishDate">Book Created Date<span
+                    th:if="${#fields.hasErrors('publishDate')}" class="text-danger"
+                    th:errors="*{publishDate}">Error</span>
+            </label> <input type="text" class="form-control" id="publishDate"
+                            name="publishDate" th:field="*{publishDate}" value="*{publishDate}"/>
+            <br/>
+
+            <label for="publishDate">Categories<span
+                    th:if="${#fields.hasErrors('categories')}" class="text-danger"
+                    th:errors="*{categories}">Error</span>
+            </label> <input type="text" class="form-control" id="categories"
+                            name="categories" th:field="*{categories}" value="*{categories}"/>
+            <br/>
+            <input type="hidden" id="id" name="id" th:field="*{id}" value="*{id}" />
+            <input type="hidden" id="version" name="version" th:field="*{version}" value="*{version}" />
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="reset" class="btn">Reset</button>
+        </div>
+    </form>
+    </p>
+</section>
+</body>
+</html>

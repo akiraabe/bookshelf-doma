@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book domain</title></head>
+<body>
+<section layout:fragment="content">
+    <p>
+    <h2>Show Book!</h2>
+    <div th:object="${book}">
+        <table border='0'>
+            <tr>
+                <td>Id :</td>
+                <td th:text="*{id}">1</td>
+            </tr>
+            <tr>
+                <td>Title :</td>
+                <td th:text="*{title}">hogehoge</td>
+            </tr>
+            <tr>
+                <td>Author :</td>
+                <td th:text="*{author}">author</td>
+            </tr>
+            <tr>
+                <td>Publisher :</td>
+                <td th:text="*{publisher}">publisher</td>
+            </tr>
+            <tr>
+                <td>Publish date :</td>
+                <td th:text="*{publishDate}">2017-04-29</td>
+            </tr>
+            <tr>
+                <td>Categories :</td>
+                <td th:text="*{categories}">Java, web, 入門,</td>
+            </tr>
+        </table>
+        <a th:href="@{'/book/modify/' + ${id}}">Modify</a>
+        <a th:href="@{'/book/remove/' + ${id}}">Remove</a>
+    </div>
+    </p>
+</section>
+</body>
+</html>
