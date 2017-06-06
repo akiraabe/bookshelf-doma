@@ -27,9 +27,6 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    @Autowired
-    BookRepository repository;
-
     @ModelAttribute
     BookForm setUpForm() {
         return new BookForm();
