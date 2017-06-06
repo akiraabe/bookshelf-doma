@@ -16,6 +16,13 @@ import org.seasar.doma.Table;
 @Table(name = "book_category_list")
 public class BookCategoryList {
 
+    public BookCategoryList() {}
+
+    public BookCategoryList(Long bookId, Long categoryListId) {
+        this.bookId = bookId;
+        this.categoryListId = categoryListId;
+    }
+
     @Id
     @Column(name = "book_id")
     private Long bookId;

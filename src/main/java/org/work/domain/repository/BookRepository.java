@@ -1,9 +1,6 @@
 package org.work.domain.repository;
 
-import org.seasar.doma.Dao;
-import org.seasar.doma.Delete;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Select;
+import org.seasar.doma.*;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.springframework.data.domain.Sort;
 import org.work.domain.model.Book;
@@ -32,6 +29,9 @@ public interface BookRepository {
 
     @Insert
     int save(Book book);
+
+    @Update
+    int update(Book book);
 
     @Delete
     int delete(Book book);

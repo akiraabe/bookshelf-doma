@@ -46,9 +46,7 @@ public class BookService {
         book.setCategoryList(categoryService.prepare(book.getCategories()));
         bookRepository.save(book);
         for (Category cat : book.getCategoryList()) {
-            BookCategoryList bookCategoryList = new BookCategoryList();
-            bookCategoryList.setBookId(book.getId());
-            bookCategoryList.setCategoryListId(cat.getId());
+            BookCategoryList bookCategoryList = new BookCategoryList(book.getId(), cat.getId());
             bookCategoryListRepository.save(bookCategoryList);
         }
     }
@@ -62,8 +60,17 @@ public class BookService {
     }
 
     public void edit(Book book) {
-        //TODO:
-        this.register(book);
+        // remove BookCategoryList
+        for (Category cat : categoryService.findByBookId(book.getId())) {
+            bookCategoryListRepository.delete(new BookCategoryList(book.getId(), cat.getId()));
+        }
+
+        book.setCategoryList(categoryService.prepare(book.getCategories()));
+        bookRepository.update(book);
+        for (Category cat : book.getCategoryList()) {
+            BookCategoryList bookCategoryList = new BookCategoryList(book.getId(), cat.getId());
+            bookCategoryListRepository.save(bookCategoryList);
+        }
     }
 
     public void remove(Long id) {
